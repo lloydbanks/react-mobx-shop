@@ -9,13 +9,14 @@ export default class Input extends React.Component {
 
 	state = {
 		count: this.props.min,
+		inputValue: this.props.min,
 		min: this.props.min,
 		max: this.props.max
 	}
 
 	setCounter(number) {
 		const count = Math.min(Math.max(number, this.props.min), this.props.max)
-		this.setState({count})
+		this.setState({count, inputValue: count})
 	}
 
 	decrease = () => {
@@ -27,15 +28,24 @@ export default class Input extends React.Component {
 	}
 
 	handleChange(value) {
-		const count = parseInt(value)
-		this.setCounter(isNaN(count) ? this.props.min : count)
+		this.setState({ inputValue: value })
+	}
+
+	fixCounter = () => {
+		const cnt = parseInt(this.state.inputValue)
+		this.setCounter(isNaN(cnt) ? this.props.min : cnt)
 	}
 
 	render() {
 		return (
 			<div>
 				<button onClick={this.decrease}>-</button>
-				<input type="text" value={this.state.count} onChange={(e) => this.handleChange(e.target.value)}/>
+				<input 
+					type="text" 
+					value={this.state.inputValue}
+					onChange={(e) => this.handleChange(e.target.value)}
+					onBlur={this.fixCounter}
+				/>
 				<button onClick={this.increase}>+</button>
 				<span> min: {this.state.min} | max: {this.state.max}</span>
 			</div>
