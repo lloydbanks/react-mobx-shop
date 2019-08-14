@@ -9,18 +9,20 @@ export default class extends React.Component {
 			{
 				id: 100,
 				title: 'iPhone 10',
-				price: '60000',
+				price: 60000,
 				rest: 10,
 				count: 1
 			},
 			{
 				id: 101,
 				title: 'Samsung 10',
-				price: '50000',
+				price: 50000,
 				rest: 5,
 				count: 1
 			}
-		]
+		],
+		total: 0,
+		submit: false
 	}
 
 	handleChange = (i, value) => {
@@ -31,6 +33,21 @@ export default class extends React.Component {
 		this.setState({products: newProducts})
 	}
 
+	getTotal = () => {
+		return <p>Total: {this.state.products.reduce((sum, product) => {
+			return sum += product.price * product.count
+		}, 0)}</p>
+	}
+
+	removeProduct = (id) => {
+		const newProducts = this.state.products.filter(product => product.id !== id)
+		this.setState({products: newProducts})
+	}
+
+	submit = () => {
+		this.setState({submit: !this.state.submit})
+	}
+
 	render() {
 		const products = this.state.products.map((product, i) => {
 			return (
@@ -39,9 +56,33 @@ export default class extends React.Component {
 					<td>{product.price}</td>
 					<td><MinMax min={1} max={product.rest} count={product.count} onChange={(value) => this.handleChange(i, value)} /></td>
 					<td>{product.price * product.count}</td>
+					<td><button onClick={() => this.removeProduct(product.id)}>Delete</button></td>
 				</tr>
 			)
 		})
+
+		const cart = (
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Price</th>
+							<th>Rest</th>
+							<th>Total</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						{products}
+					</tbody>
+				</table>
+				{this.getTotal()}
+			</div>
+		)
+
+		const success = <div>Success</div>
+
 		return (
 			<div>
 				<h2>Input counter</h2>
@@ -53,19 +94,8 @@ export default class extends React.Component {
 				<Lazy min={10} max={20} />
 
 				<h2>Cart</h2>
-				<table>
-					<thead>
-						<tr>
-							<th>Title</th>
-							<th>Price</th>
-							<th>Rest</th>
-							<th>Total</th>
-						</tr>
-					</thead>
-					<tbody>
-						{products}
-					</tbody>
-				</table>
+				{!this.state.submit ? cart : success}
+				<button onClick={this.submit}>{!this.state.submit ? 'Save' : 'Back'}</button>
 			</div>
 		)
 	}
