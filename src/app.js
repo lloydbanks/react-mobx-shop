@@ -65,6 +65,7 @@ export default class extends React.Component {
 		)
 
 		const success = <div>Success</div>
+		const changeBtn = <button onClick={() => this.handleChange(0, 4)}>Change product</button>
 
 		return (
 			<div>
@@ -79,6 +80,7 @@ export default class extends React.Component {
 				<h2>Cart</h2>
 				{!this.state.submit ? cart : success}
 				<button onClick={this.submit}>{!this.state.submit ? 'Save' : 'Back'}</button>
+				{!this.state.submit ? changeBtn : null}				
 			</div>
 		)
 	}

@@ -40,6 +40,12 @@ export default class Input extends React.Component {
 		this.setCounter(isNaN(cnt) ? this.props.min : cnt)
 	}
 
+	componentDidUpdate(prevProps, prevState) {
+		if(prevProps.count !== this.props.count) {
+			this.setState({inputValue: this.props.count})
+		}
+	}
+
 	render() {
 		return (
 			<div>
