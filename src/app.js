@@ -5,43 +5,26 @@ import MinMax from './input'
 
 export default class extends React.Component {
 	state = {
-		products: [
-			{
-				id: 100,
-				title: 'iPhone 10',
-				price: 60000,
-				rest: 10,
-				count: 1
-			},
-			{
-				id: 101,
-				title: 'Samsung 10',
-				price: 50000,
-				rest: 5,
-				count: 1
-			}
-		],
+		products: getProducts(),
 		total: 0,
 		submit: false
 	}
 
 	handleChange = (i, value) => {
-		const newProducts = [...this.state.products]
-		const newProduct = {...newProducts[i]}
-		newProduct.count = value
-		newProducts[i] = newProduct
-		this.setState({products: newProducts})
+		const products = [...this.state.products]
+		products[i] = {...products[i], count: value}
+		this.setState({products})
 	}
 
 	getTotal = () => {
-		return <p>Total: {this.state.products.reduce((sum, product) => {
+		return this.state.products.reduce((sum, product) => {
 			return sum += product.price * product.count
-		}, 0)}</p>
+		}, 0)
 	}
 
 	removeProduct = (id) => {
-		const newProducts = this.state.products.filter(product => product.id !== id)
-		this.setState({products: newProducts})
+		const products = this.state.products.filter(product => product.id !== id)
+		this.setState({products})
 	}
 
 	submit = () => {
@@ -77,7 +60,7 @@ export default class extends React.Component {
 						{products}
 					</tbody>
 				</table>
-				{this.getTotal()}
+				<p>{this.getTotal()}</p>
 			</div>
 		)
 
@@ -99,4 +82,23 @@ export default class extends React.Component {
 			</div>
 		)
 	}
+}
+
+function getProducts() {
+	return [
+		{
+			id: 100,
+			title: 'iPhone 10',
+			price: 60000,
+			rest: 10,
+			count: 1
+		},
+		{
+			id: 101,
+			title: 'Samsung 10',
+			price: 50000,
+			rest: 5,
+			count: 1
+		}
+	]
 }
