@@ -2,12 +2,14 @@ import React from 'react'
 import BadInput from './bad-input'
 import Lazy from './lazy'
 import MinMax from './input'
+import LazyMinMax from './lazy-minmax'
 
 export default class extends React.Component {
 	state = {
 		products: getProducts(),
 		total: 0,
-		submit: false
+		submit: false,
+		lazyValue: 'default value'
 	}
 
 	handleChange = (i, value) => {
@@ -29,6 +31,10 @@ export default class extends React.Component {
 
 	submit = () => {
 		this.setState({submit: !this.state.submit})
+	}
+
+	lazyHandler = (lazyValue) => {
+		this.setState({lazyValue})
 	}
 
 	render() {
@@ -80,7 +86,15 @@ export default class extends React.Component {
 				<h2>Cart</h2>
 				{!this.state.submit ? cart : success}
 				<button onClick={this.submit}>{!this.state.submit ? 'Save' : 'Back'}</button>
-				{!this.state.submit ? changeBtn : null}				
+				{!this.state.submit ? changeBtn : null}		
+
+				<h2>Lazy MinMax</h2>
+				<LazyMinMax 
+					value={this.state.lazyValue}
+					onChange={(e) => this.lazyHandler(e.target.value)}
+					nativeProps={{type: 'text', className: 'lazy-minMax'}}
+					/>
+				<div>{this.state.lazyValue}</div>
 			</div>
 		)
 	}
