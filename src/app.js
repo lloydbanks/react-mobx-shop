@@ -9,7 +9,8 @@ export default class extends React.Component {
 		products: getProducts(),
 		total: 0,
 		submit: false,
-		lazyValue: 'default value'
+		lazyValue: 'default value',
+		lazyValue2: 'default value'
 	}
 
 	handleChange = (i, value) => {
@@ -33,8 +34,8 @@ export default class extends React.Component {
 		this.setState({submit: !this.state.submit})
 	}
 
-	lazyHandler = (lazyValue) => {
-		this.setState({lazyValue})
+	lazyHandler = (lazyObj) => {
+		this.setState(lazyObj)
 	}
 
 	render() {
@@ -91,10 +92,22 @@ export default class extends React.Component {
 				<h2>Lazy MinMax</h2>
 				<LazyMinMax 
 					value={this.state.lazyValue}
-					onChange={(e) => this.lazyHandler(e.target.value)}
+					onChange={(e) => this.lazyHandler({lazyValue: e.target.value})}
 					nativeProps={{type: 'text', className: 'lazy-minMax'}}
 					/>
 				<div>{this.state.lazyValue}</div>
+				<div><button onClick={(e) => this.setState({lazyValue: 'test'})}>Change value</button></div>
+
+				<h2>Lazy MinMax no lazy</h2>
+				<LazyMinMax 
+					value={this.state.lazyValue2}
+					nativeProps={{
+						type: 'text', 
+						className: 'lazy-minMax',
+						onChange: (e) => this.lazyHandler({lazyValue2: e.target.value})
+					}}
+				/>
+				<div>{this.state.lazyValue2}</div>
 			</div>
 		)
 	}
