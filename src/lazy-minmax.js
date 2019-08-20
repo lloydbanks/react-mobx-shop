@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styles from './lazy-minmax.module.css'
 
 export default class extends React.Component {
 	static defaultProps = {
@@ -30,10 +31,11 @@ export default class extends React.Component {
 	}
 
 	render() {
+		const attr = {...this.props.nativeProps, className: styles.lazy}
 		return <input
 			defaultValue={this.props.value} 
 			onBlur={(e) => this.blurHandler(e)}
-			{...this.props.nativeProps}
+			{...attr}
 			ref={this.nativeInput}
 			/>
 	}

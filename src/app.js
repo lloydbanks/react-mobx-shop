@@ -3,6 +3,8 @@ import BadInput from './bad-input'
 import Lazy from './lazy'
 import MinMax from './input'
 import LazyMinMax from './lazy-minmax'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Button } from 'react-bootstrap'
 
 export default class extends React.Component {
 	state = {
@@ -53,7 +55,7 @@ export default class extends React.Component {
 
 		const cart = (
 			<div>
-				<table>
+				<table className="table table-bordered">
 					<thead>
 						<tr>
 							<th>Title</th>
@@ -75,7 +77,7 @@ export default class extends React.Component {
 		const changeBtn = <button onClick={() => this.handleChange(0, 4)}>Change product</button>
 
 		return (
-			<div>
+			<div className="container">
 				<h2>Input counter</h2>
 				<p><i><b>Issue</b>: input can't be changed using React's `onChange` event</i></p>
 				<BadInput min={10} max={20} />
@@ -93,19 +95,15 @@ export default class extends React.Component {
 				<LazyMinMax 
 					value={this.state.lazyValue}
 					onChange={(e) => this.lazyHandler({lazyValue: e.target.value})}
-					nativeProps={{type: 'text', className: 'lazy-minMax'}}
+					nativeProps={{type: 'text'}}
 					/>
 				<div>{this.state.lazyValue}</div>
-				<div><button onClick={(e) => this.setState({lazyValue: 'test'})}>Change value</button></div>
+				<div><Button variant="primary" onClick={(e) => this.setState({lazyValue: 'test'})}>Change value</Button></div>
 
 				<h2>Lazy MinMax no lazy</h2>
 				<LazyMinMax 
 					value={this.state.lazyValue2}
-					nativeProps={{
-						type: 'text', 
-						className: 'lazy-minMax',
-						onChange: (e) => this.lazyHandler({lazyValue2: e.target.value})
-					}}
+					nativeProps={{type: 'text', onChange: (e) => this.lazyHandler({lazyValue2: e.target.value})}}
 				/>
 				<div>{this.state.lazyValue2}</div>
 			</div>

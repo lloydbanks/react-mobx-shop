@@ -1,4 +1,5 @@
 const path = require('path') // генерация абсолютного пути из относительного
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const conf = {
 	entry: './src/main.js',
@@ -23,9 +24,47 @@ const conf = {
 						]
 					}
 				}
+			},
+			{
+				test: /\.module\.css$/,
+				exclude: /node_modules/,
+				use: [
+					{
+			            loader: MiniCssExtractPlugin.loader,
+			            options: {
+			              hmr: process.env.NODE_ENV === 'development',
+			            },
+			        },
+			        {
+			        	loader: 'css-loader',
+			        	options: {
+			        		importLoaders: 1,
+			        		modules: {
+			        			localIdentName: '[local]__[sha1:hash:hex:7]'
+			        		},
+			        	}
+			        }
+				]
+			},
+			{
+				test: /^((?!\.module).)*css$/,
+				use: [
+			        {
+			        	loader: MiniCssExtractPlugin.loader,
+			        	options: {
+			              hmr: process.env.NODE_ENV === 'development',
+			            }
+			        },
+			        'css-loader'
+				]
 			}
 		]
-	}
+	},
+	plugins: [
+	    new MiniCssExtractPlugin({
+	      filename: 'styles.css',
+	    }),
+	  ],
 }
 
 module.exports = conf
