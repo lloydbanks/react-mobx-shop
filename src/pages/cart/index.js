@@ -1,15 +1,12 @@
 import React from 'react'
+import {CART, ORDER, RESULT} from '@/consts'
 import MinMax from '@c/inputs/minmax'
 import PropTypes from 'prop-types'
-import cartModel from '@s/cart.js'
-
+import cartModel from '@s/cart'
+import router from '@s/router'
 import { Button } from 'react-bootstrap'
 
 export default class extends React.Component {
-	static propTypes = {
-		onSend: PropTypes.func.isRequired,
-	}
-
 	render() {
 		const products = cartModel.products.map((product, i) => {
 			return (
@@ -43,7 +40,7 @@ export default class extends React.Component {
 					</table>
 					<p>Total: {cartModel.total}</p>
 				</div>
-				<Button onClick={this.props.onSend}>Next</Button>
+				<Button onClick={() => router.moveTo(ORDER)}>Next</Button>
 			</div>
 		)
 	}
