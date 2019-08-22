@@ -14,8 +14,8 @@ export default class extends React.Component {
 		showModal: false
 	}
 
-	showModal = (status = true) => {
-		this.setState({showModal: status})
+	showModal = (showModal) => {
+		this.setState({showModal})
 	}
 
 	confirm = () => {
@@ -48,7 +48,7 @@ export default class extends React.Component {
 
 				  <Button variant="warning" onClick={onBack} className="mr-10">Back to cart</Button>
 				  &nbsp;
-				  <Button variant="primary" onClick={this.showModal}>Apply order</Button>
+				  <Button variant="primary" onClick={() => this.showModal(true)}>Apply order</Button>
 
 				  <Modal show={this.state.showModal} backdrop="static">
 			        <Modal.Header closeButton>

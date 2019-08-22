@@ -2,14 +2,13 @@ import React from 'react'
 import {CART, ORDER, RESULT} from './consts'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import DemoInputs from './components/Inputs/demo'
-import Cart from './components/Cart'
-import Order from './components/Order'
-import Result from './components/Result'
+import DemoInputs from '@c/inputs/demo'
+import Cart from '@p/cart'
+import Order from '@p/order'
+import Result from '@p/result'
 
 export default class extends React.Component {
 	state = {
-		products: getProducts(),
 		formData: {
 			name: {
 				label: 'Name',
@@ -39,12 +38,6 @@ export default class extends React.Component {
 		this.setState({activeRoute: RESULT})
 	}
 
-	handleChange = (i, value) => {
-		const products = [...this.state.products]
-		products[i] = {...products[i], count: value}
-		this.setState({products})
-	}
-
 	handleRemove = (id) => {
 		const products = this.state.products.filter(product => product.id !== id)
 		this.setState({products})
@@ -62,12 +55,7 @@ export default class extends React.Component {
 
 		switch(activeRoute) {
 			case CART:
-				page = <Cart 
-					products={this.state.products}
-					onSend={this.moveToOrder}
-					onChange={(i, value) => this.handleChange(i, value)}
-					onRemove={(id) => this.handleRemove(id)}
-					/>
+				page = <Cart onSend={this.moveToOrder} />
 				break
 			case ORDER:
 				page = <Order
@@ -91,23 +79,4 @@ export default class extends React.Component {
 			</div>
 		)
 	}
-}
-
-function getProducts() {
-	return [
-		{
-			id: 100,
-			title: 'iPhone 10',
-			price: 60000,
-			rest: 10,
-			count: 1
-		},
-		{
-			id: 101,
-			title: 'Samsung 10',
-			price: 50000,
-			rest: 5,
-			count: 1
-		}
-	]
 }
