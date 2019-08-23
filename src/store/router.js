@@ -3,6 +3,7 @@ import {CART, ORDER, RESULT} from '@/consts'
 import Cart from '@p/cart'
 import Order from '@p/order'
 import Result from '@p/result'
+import {observable, computed, action} from 'mobx'
 
 class Router {
 	routes = {
@@ -11,13 +12,14 @@ class Router {
 		[RESULT]: () => <Result />
 	}
 
-	active = CART
+	@observable active = CART
 
-	get component() {
+	@computed get component() {
 		return this.routes[this.active]()
 	}
 
-	moveTo(route) {
+	@action moveTo(route) {
+		console.log(route)
 		this.active = route
 	}
 }

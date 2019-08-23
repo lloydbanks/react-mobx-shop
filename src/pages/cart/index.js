@@ -4,9 +4,10 @@ import MinMax from '@c/inputs/minmax'
 import PropTypes from 'prop-types'
 import cartModel from '@s/cart'
 import router from '@s/router'
-import { Button } from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
+import {observer} from 'mobx-react'
 
-export default class extends React.Component {
+export default @observer class extends React.Component {
 	render() {
 		const products = cartModel.products.map((product, i) => {
 			return (
@@ -15,7 +16,7 @@ export default class extends React.Component {
 					<td>{product.price}</td>
 					<td><MinMax min={1} max={product.rest} count={product.count} onChange={(value) => cartModel.change(i, value)} /></td>
 					<td>{product.price * product.count}</td>
-					<td><button onClick={() => cartModel.remove(product.id)}>Delete</button></td>
+					<td><button onClick={() => cartModel.remove(i)}>Delete</button></td>
 				</tr>
 			)
 		})
