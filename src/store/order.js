@@ -29,6 +29,15 @@ class Order {
 		return Object.values(this.formData).every(input => input.valid)
 	}
 
+	@computed get user() {
+		const user = {}
+		for(let key in this.formData) {
+			user[key] = this.formData[key].value
+		}
+
+		return user
+	}
+
 	@action change(key, value) {
 		const field = this.formData[key]
 		field.value = value
