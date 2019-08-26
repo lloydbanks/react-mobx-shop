@@ -5,7 +5,7 @@ class Order {
 		name: {
 			value: '',
 			label: 'Name',
-			validator: val => /^[a-zA-Z]{2,}$/.test(val),
+			validator: val => /^[a-zA-Z ]{2,}$/.test(val),
 			errorText: 'Only latin symbols. Min 3',
 			valid: null
 		},
@@ -27,6 +27,15 @@ class Order {
 
 	@computed get disabled() {
 		return Object.values(this.formData).every(input => input.valid)
+	}
+
+	@computed get data() {
+		const obj = {}
+		for(let name in this.formData) {
+			obj[name] = this.formData[name].value
+		}
+
+		return obj
 	}
 
 	@action change(key, value) {

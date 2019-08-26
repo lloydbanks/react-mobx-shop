@@ -19,7 +19,6 @@ class Router {
 	}
 
 	@action moveTo(route) {
-		console.log(route)
 		this.active = route
 	}
 }
