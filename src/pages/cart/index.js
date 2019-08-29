@@ -8,13 +8,17 @@ import {Button} from 'react-bootstrap'
 import {observer} from 'mobx-react'
 
 export default @observer class extends React.Component {
+	nextStep() {
+		router.moveTo(ORDER)
+	}
+
 	render() {
 		const products = cartModel.products.map((product, i) => {
 			return (
 				<tr key={product.id}>
 					<td>{product.title}</td>
 					<td>{product.price}</td>
-					<td><MinMax min={1} max={product.rest} count={product.count} onChange={(value) => cartModel.change(i, value)} /></td>
+					<td><MinMax min={1} max={product.rest} count={product.count} onChange={cartModel.changeCount[i]} /></td>
 					<td>{product.price * product.count}</td>
 					<td><button onClick={() => cartModel.remove(i)}>Delete</button></td>
 				</tr>
@@ -41,7 +45,7 @@ export default @observer class extends React.Component {
 					</table>
 					<p>Total: {cartModel.total}</p>
 				</div>
-				<Button onClick={() => router.moveTo(ORDER)}>Next</Button>
+				<Button onClick={this.nextStep}>Next</Button>
 			</div>
 		)
 	}

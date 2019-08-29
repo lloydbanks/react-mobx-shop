@@ -9,8 +9,10 @@ class Cart {
 		}, 0)
 	}
 
-	@action change(i, cnt) {
-		this.products[i].count = cnt
+	@computed get changeCount() {
+		return this.products.map((product, i) => {
+			return (count) => this.products[i].count = count
+		})
 	}
 
 	@action remove(i) {
