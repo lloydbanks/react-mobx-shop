@@ -1,11 +1,17 @@
 import Cart from '@p/cart'
 import Order from '@p/order'
 import Result from '@p/result'
+import Error404 from '@c/errors/404'
 
-const routes = [
-	{ path: '/', component: Cart, exact: true },
-	{ path: '/order', component: Order, exact: true },
-	{ path: '/success', component: Result, exact: true }
+export const routes = [
+	{ name: 'home', path: '/', component: Cart, exact: true },
+	{ name: 'order', path: '/order', component: Order, exact: true },
+	{ name: 'success', path: '/success', component: Result, exact: true },
+	{ name: '404', path: '**', component: Error404, exact: true }
 ]
 
-export default routes
+export const routesMap = {}
+
+routes.forEach(route => {
+	routesMap[route.name] = route.path
+})

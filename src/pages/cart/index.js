@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import cartModel from '@s/cart'
 import {Button} from 'react-bootstrap'
 import {observer} from 'mobx-react'
+import {Link} from 'react-router-dom'
+import {routesMap} from '@/routes'
 
 export default @observer class extends React.Component {
 	render() {
@@ -40,7 +42,7 @@ export default @observer class extends React.Component {
 					</table>
 					<p>Total: {cartModel.total}</p>
 				</div>
-				<Button>Next</Button>
+				<Link to={routesMap.order} className="btn btn-primary">Next</Link>
 			</div>
 		)
 	}
