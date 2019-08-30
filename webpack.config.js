@@ -73,6 +73,9 @@ const conf = {
 			'@p': path.resolve(__dirname, 'src/pages'),
 			'@s': path.resolve(__dirname, 'src/store'),
 		}
+	},
+	devServer: {
+		historyApiFallback: true
 	}
 }
 

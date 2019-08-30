@@ -3,15 +3,10 @@ import {CART, ORDER, RESULT} from '@/consts'
 import MinMax from '@c/inputs/minmax'
 import PropTypes from 'prop-types'
 import cartModel from '@s/cart'
-import router from '@s/router'
 import {Button} from 'react-bootstrap'
 import {observer} from 'mobx-react'
 
 export default @observer class extends React.Component {
-	nextStep() {
-		router.moveTo(ORDER)
-	}
-
 	render() {
 		const products = cartModel.products.map((product, i) => {
 			return (
@@ -45,7 +40,7 @@ export default @observer class extends React.Component {
 					</table>
 					<p>Total: {cartModel.total}</p>
 				</div>
-				<Button onClick={this.nextStep}>Next</Button>
+				<Button>Next</Button>
 			</div>
 		)
 	}
