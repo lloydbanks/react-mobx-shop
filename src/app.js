@@ -2,7 +2,7 @@ import React from 'react'
 import {CART, ORDER, RESULT} from './consts'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {observer} from 'mobx-react'
-import {BrowserRouter, Route} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import {routes} from '@/routes'
 
 export default @observer class extends React.Component {
@@ -15,7 +15,9 @@ export default @observer class extends React.Component {
 		return (
 			<BrowserRouter>
 				<div className="container">
-					{Routes}
+					<Switch>
+						{Routes}
+					</Switch>
 				</div>
 			</BrowserRouter>
 		)

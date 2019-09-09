@@ -13,5 +13,7 @@ export const routes = [
 export const routesMap = {}
 
 routes.forEach(route => {
-	routesMap[route.name] = route.path
+	if(route.hasOwnProperty('name')) {
+		routesMap[route.name] = route.path	
+	}
 })

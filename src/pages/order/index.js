@@ -5,6 +5,8 @@ import orderModel from '@s/order'
 import {CART, RESULT} from '@/consts'
 import {observer} from 'mobx-react'
 import cartModel from '@s/cart'
+import {routesMap} from '@/routes'
+import {Link} from 'react-router-dom'
 
 export default @observer class extends React.Component {
 	state = {
@@ -17,7 +19,7 @@ export default @observer class extends React.Component {
 
 	confirm = () => {
 		this.show(false)
-		router.moveTo(RESULT)
+		this.props.history.push(routesMap.success)
 	}
 
 	render() {
@@ -41,7 +43,8 @@ export default @observer class extends React.Component {
 			<div>
 				<h2>Order</h2>
 				<Form>{formFields}</Form>
-				<Button variant="warning" onClick={() => router.moveTo(CART)}>Back to cart</Button>
+				
+				<Link to={routesMap.home} className="btn btn-warning">Back to cart</Link>
 				&nbsp;
 				<Button variant="primary" onClick={() => this.show(true)} disabled={!orderModel.disabled}>Apply order</Button>
 
