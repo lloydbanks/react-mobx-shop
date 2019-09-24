@@ -3,9 +3,10 @@ import {CART, ORDER, RESULT} from '@/consts'
 import MinMax from '@c/inputs/minmax'
 import PropTypes from 'prop-types'
 import cartModel from '@s/cart'
-import router from '@s/router'
 import {Button} from 'react-bootstrap'
 import {observer} from 'mobx-react'
+import {Link} from 'react-router-dom'
+import {routesMap} from '@/routes'
 
 export default @observer class extends React.Component {
 	render() {
@@ -14,7 +15,7 @@ export default @observer class extends React.Component {
 				<tr key={product.id}>
 					<td>{product.title}</td>
 					<td>{product.price}</td>
-					<td><MinMax min={1} max={product.rest} count={product.count} onChange={(value) => cartModel.change(i, value)} /></td>
+					<td><MinMax min={1} max={product.rest} count={product.count} onChange={cartModel.changeCount[i]} /></td>
 					<td>{product.price * product.count}</td>
 					<td><button onClick={() => cartModel.remove(i)}>Delete</button></td>
 				</tr>
@@ -41,7 +42,7 @@ export default @observer class extends React.Component {
 					</table>
 					<p>Total: {cartModel.total}</p>
 				</div>
-				<Button onClick={() => router.moveTo(ORDER)}>Next</Button>
+				<Link to={routesMap.order} className="btn btn-primary">Next</Link>
 			</div>
 		)
 	}

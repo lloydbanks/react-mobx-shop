@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default class Input extends React.Component {
+export default class Input extends React.PureComponent {
 	static defaultProps = {
 		onChange: function(v){console.log(v)}
 	}
