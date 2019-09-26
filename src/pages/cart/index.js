@@ -10,14 +10,14 @@ import {routesMap} from '@/routes'
 
 export default @observer class extends React.Component {
 	render() {
-		const products = cartModel.products.map((product, i) => {
+		const products = cartModel.detailProducts.map((product, i) => {
 			return (
 				<tr key={product.id}>
 					<td>{product.title}</td>
 					<td>{product.price}</td>
-					<td><MinMax min={1} max={product.rest} count={product.count} onChange={cartModel.changeCount[i]} /></td>
+					<td><MinMax min={1} max={product.rest} count={product.count} onChange={() => cartModel.change(product.id, count)} /></td>
 					<td>{product.price * product.count}</td>
-					<td><button onClick={() => cartModel.remove(i)}>Delete</button></td>
+					<td><button onClick={() => cartModel.remove(product.id)}>Delete</button></td>
 				</tr>
 			)
 		})
