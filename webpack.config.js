@@ -76,7 +76,9 @@ const conf = {
 	},
 	devServer: {
 		historyApiFallback: true
-	}
+	},
+	devtool: 'eval-source-map',
+	// stats: 'verbose'
 }
 
 module.exports = conf
