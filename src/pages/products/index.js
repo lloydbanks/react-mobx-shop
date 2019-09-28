@@ -4,7 +4,7 @@ import Error404 from '@c/errors/404'
 export default function(props) {
 	return (
 		<div>
-			Post #{props.match.params.id}
+			Product #{props.match.params.id}
 		</div>
 	)
 }

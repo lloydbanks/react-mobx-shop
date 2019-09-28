@@ -1,43 +1,40 @@
 import {observable, computed, action} from 'mobx'
+import products from '@s/products'
 
 class Cart {
-	@observable products = getProducts()
+	@observable products = [{id: 101, count: 2}]
+
+	@computed get detailProducts() {
+		return this.products.map(product => {
+			const productById = products.getById(product.id)
+
+			return {...productById, count: product.count}
+		})
+	}
 
 	@computed get total() {
-		return this.products.reduce((total, product) => {
+		return this.detailProducts.reduce((total, product) => {
 			return total + product.price * product.count
 		}, 0)
 	}
 
-	@computed get changeCount() {
-		return this.products.map((product, i) => {
-			return (count) => this.products[i].count = count
-		})
+	@action add(id) {
+		this.products.push({id, count: 1})
 	}
 
-	@action remove(i) {
-		this.products.splice(i, 1)
-	}
-}
+	@action change(id, count) {
+		const index = this.products.findIndex(product => product.id === id)
 
-// server api
-function getProducts() {
-	return [
-		{
-			id: 100,
-			title: 'iPhone 10',
-			price: 60000,
-			rest: 10,
-			count: 1
-		},
-		{
-			id: 101,
-			title: 'Samsung 10',
-			price: 50000,
-			rest: 5,
-			count: 1
-		}
-	]
+		if(index !== -1) this.products[index].count = count
+	}
+
+	@action remove(id) {
+		const index = this.products.findIndex(product => product.id === id)
+
+		if(index !== -1) this.products.splice(index, 1)
+	}
+
+	
 }
 
 export default new Cart
