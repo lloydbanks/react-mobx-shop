@@ -2,7 +2,7 @@ import React from 'react'
 import {CART, ORDER, RESULT} from '@/consts'
 import MinMax from '@c/inputs/minmax'
 import PropTypes from 'prop-types'
-import cartModel from '@s/cart'
+import cart from '@s/cart'
 import {Button} from 'react-bootstrap'
 import {observer} from 'mobx-react'
 import {Link} from 'react-router-dom'
@@ -10,14 +10,14 @@ import {routesMap} from '@/routes'
 
 export default @observer class extends React.Component {
 	render() {
-		const products = cartModel.detailProducts.map((product, i) => {
+		const products = cart.detailProducts.map((product, i) => {
 			return (
 				<tr key={product.id}>
 					<td>{product.title}</td>
 					<td>{product.price}</td>
-					<td><MinMax min={1} max={product.rest} count={product.count} onChange={(count) => cartModel.change(product.id, count)} /></td>
+					<td><MinMax min={1} max={product.rest} count={product.count} onChange={(count) => cart.change(product.id, count)} /></td>
 					<td>{product.price * product.count}</td>
-					<td><button onClick={() => cartModel.remove(product.id)}>Delete</button></td>
+					<td><button onClick={() => cart.remove(product.id)}>Delete</button></td>
 				</tr>
 			)
 		})
@@ -40,9 +40,9 @@ export default @observer class extends React.Component {
 							{products}
 						</tbody>
 					</table>
-					<p>Total: {cartModel.total}</p>
+					<p>Total: {cart.total}</p>
 				</div>
-				<Link to={routesMap.order} className="btn btn-primary">Next</Link>
+				{!!cart.products.length && <Link to={routesMap.order} className="btn btn-primary">Next</Link>}
 			</div>
 		)
 	}

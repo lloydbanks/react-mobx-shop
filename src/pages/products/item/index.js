@@ -11,7 +11,7 @@ export default function(props) {
 		<div>
 			<h2>{product.title}</h2>
 			<p>Price: {product.price}</p>
-			<Link to={routesMap.home}>Back</Link>
+			<Link to={routesMap.home} className="btn btn-warning">Back</Link>
 		</div>
 	)
 }

@@ -2,7 +2,7 @@ import {observable, computed, action} from 'mobx'
 import products from '@s/products'
 
 class Cart {
-	@observable products = [{id: 101, count: 2}]
+	@observable products = []
 
 	@computed get detailProducts() {
 		return this.products.map(product => {
@@ -16,6 +16,12 @@ class Cart {
 		return this.detailProducts.reduce((total, product) => {
 			return total + product.price * product.count
 		}, 0)
+	}
+
+	@computed get contains() {
+		return (id) => {
+			return this.products.some(product => product.id === id)
+		}
 	}
 
 	@action add(id) {
@@ -33,8 +39,6 @@ class Cart {
 
 		if(index !== -1) this.products.splice(index, 1)
 	}
-
-	
 }
 
 export default new Cart
