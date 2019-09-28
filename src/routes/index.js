@@ -7,6 +7,7 @@ import Error404 from '@c/errors/404'
 
 export const routes = [
 	{ name: 'home', path: '/', component: ProductsList, exact: true },
+	{ name: 'cart', path: '/cart', component: Cart, exact: true },
 	{ name: 'order', path: '/order', component: Order, exact: true },
 	{ name: 'success', path: '/success', component: Result, exact: true },
 	{ name: 'products', path: '/products/', component: ProductsList, exact: true },
