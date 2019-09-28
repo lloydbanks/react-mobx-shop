@@ -1,15 +1,16 @@
 import React from 'react'
-import productsModel from '@s/products'
 import cart from '@s/cart'
 import {Card, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import {urlBuilder} from '@/routes'
 import styles from './index.module.css'
-import {observer} from 'mobx-react'
+import {observer, inject} from 'mobx-react'
 
-export default @observer class Products extends React.Component {
+export default @inject('stores') @observer class extends React.Component {
 	render() {
-		const products = productsModel.products.map(product => {
+		const {products, cart} = this.props.stores
+
+		const productsCard = products.data.map(product => {
 			let btn
 
 			if(!cart.contains(product.id)) {
@@ -42,7 +43,7 @@ export default @observer class Products extends React.Component {
 			<div>
 				<h2>Products</h2>
 				<div className="row">
-					{products}
+					{productsCard}
 				</div>
 			</div>
 		)

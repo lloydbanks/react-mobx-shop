@@ -1,11 +1,12 @@
 import React from 'react'
-import productsModel from '@s/products'
 import {Link} from 'react-router-dom'
 import {routesMap} from '@/routes'
+import {inject} from 'mobx-react'
 
-export default function(props) {
+export default inject('stores') (function(props) {
 	const {id} = props.match.params
-	const product = productsModel.getById(id)
+	const {products} = props.stores
+	const product = products.getById(id)
 
 	return (
 		<div>
@@ -14,4 +15,4 @@ export default function(props) {
 			<Link to={routesMap.home} className="btn btn-warning">Back</Link>
 		</div>
 	)
-}
+})

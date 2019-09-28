@@ -1,12 +1,16 @@
 import {observable, computed, action} from 'mobx'
-import products from '@s/products'
+// import rootStore from './'
 
-class Cart {
+export default class {
+	constructor(rootStore) {
+		this.rootStore = rootStore
+	}
+
 	@observable products = []
 
 	@computed get detailProducts() {
 		return this.products.map(product => {
-			const productById = products.getById(product.id)
+			const productById = this.rootStore.products.getById(product.id)
 
 			return {...productById, count: product.count}
 		})
@@ -40,5 +44,3 @@ class Cart {
 		if(index !== -1) this.products.splice(index, 1)
 	}
 }
-
-export default new Cart

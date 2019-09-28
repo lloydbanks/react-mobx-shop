@@ -2,14 +2,14 @@ import React from 'react'
 import {CART, ORDER, RESULT} from '@/consts'
 import MinMax from '@c/inputs/minmax'
 import PropTypes from 'prop-types'
-import cart from '@s/cart'
 import {Button} from 'react-bootstrap'
-import {observer} from 'mobx-react'
+import {observer, inject} from 'mobx-react'
 import {Link} from 'react-router-dom'
 import {routesMap} from '@/routes'
 
-export default @observer class extends React.Component {
+export default @inject('stores') @observer class extends React.Component {
 	render() {
+		const {cart} = this.props.stores
 		const products = cart.detailProducts.map((product, i) => {
 			return (
 				<tr key={product.id}>

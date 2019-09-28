@@ -1,12 +1,16 @@
 import {observable, computed, action} from 'mobx'
 
-class Products {
-	@observable products = getProducts()
+export default class {
+	constructor(rootStore) {
+		this.rootStore = rootStore
+	}
+
+	@observable data = getProducts()
 
 	@computed get productsMap() {
 		const obj = {}
 
-		this.products.forEach((product, index) => {
+		this.data.forEach((product, index) => {
 			obj[product.id] = index
 		})
 
@@ -16,7 +20,7 @@ class Products {
 	getById(id) {
 		const index = this.productsMap[id]
 
-		return (index !== undefined) ? this.products[index] : null
+		return (index !== undefined) ? this.data[index] : null
 	}
 }
 
@@ -37,5 +41,3 @@ function getProducts() {
 		}
 	]
 }
-
-export default new Products
