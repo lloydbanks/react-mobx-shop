@@ -1,14 +1,16 @@
 import Cart from '@p/cart'
 import Order from '@p/order'
 import Result from '@p/result'
-import Product from '@p/products'
+import ProductsList from '@p/products/list'
+import ProductsItem from '@p/products/item'
 import Error404 from '@c/errors/404'
 
 export const routes = [
-	{ name: 'home', path: '/', component: Cart, exact: true },
+	{ name: 'home', path: '/', component: ProductsList, exact: true },
 	{ name: 'order', path: '/order', component: Order, exact: true },
 	{ name: 'success', path: '/success', component: Result, exact: true },
-	{ name: 'products', path: '/products/:id', component: Product, exact: true },
+	{ name: 'products', path: '/products/', component: ProductsList, exact: true },
+	{ name: 'product', path: '/products/:id', component: ProductsItem, exact: true },
 	{ name: '404', path: '**', component: Error404, exact: true }
 ]
 
