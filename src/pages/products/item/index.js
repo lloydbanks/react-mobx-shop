@@ -1,10 +1,17 @@
 import React from 'react'
-import Error404 from '@c/errors/404'
+import productsModel from '@s/products'
+import {Link} from 'react-router-dom'
+import {routesMap} from '@/routes'
 
 export default function(props) {
+	const {id} = props.match.params
+	const product = productsModel.getById(id)
+
 	return (
 		<div>
-			Product #{props.match.params.id}
+			<h2>{product.title}</h2>
+			<p>Price: {product.price}</p>
+			<Link to={routesMap.home}>Back</Link>
 		</div>
 	)
 }
