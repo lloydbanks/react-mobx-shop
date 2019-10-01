@@ -1,9 +1,11 @@
 import React from 'react'
 import {CART, ORDER, RESULT} from './consts'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Sidebar from '@c/sidebar'
+import Header from '@c/header'
 import {observer, Provider} from 'mobx-react'
-import {BrowserRouter, Route, Switch, Link} from 'react-router-dom'
-import {routes, routesMap} from '@/routes'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {routes} from '@/routes'
 import stores from '@s'
 
 export default @observer class extends React.Component {
@@ -18,19 +20,13 @@ export default @observer class extends React.Component {
 				<BrowserRouter>
 					<div className="container">
 						<div className="row">
+							<div className="col">
+								<Header />
+							</div>
+						</div>
+						<div className="row">
 							<div className="col col-3">
-								<h2>Sidebar</h2>
-								<ul className="list-group">
-									<li className="list-group-item">
-										<Link to={routesMap.home}>Home</Link>
-									</li>
-									<li className="list-group-item">
-										<Link to={routesMap.cart}>Cart</Link>
-									</li>
-									<li className="list-group-item">
-										<Link to={routesMap.order}>Order</Link>
-									</li>
-								</ul>
+								<Sidebar />
 							</div>
 							<div className="col col-9">
 								<Switch>
