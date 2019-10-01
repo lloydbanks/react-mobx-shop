@@ -4,7 +4,7 @@ import MinMax from '@c/inputs/minmax'
 import PropTypes from 'prop-types'
 import {Button} from 'react-bootstrap'
 import store from '@c/hocs/store'
-import {Link} from 'react-router-dom'
+import LinkButton from '@c/hocs/link'
 import {routesMap} from '@/routes'
 
 class Cart extends React.Component {
@@ -42,7 +42,7 @@ class Cart extends React.Component {
 					</table>
 					<p>Total: {cart.total}</p>
 				</div>
-				{!!cart.products.length && <Link to={routesMap.order} className="btn btn-primary">Next</Link>}
+				{!!cart.products.length && <LinkButton to={routesMap.order} className="btn btn-primary">Next</LinkButton>}
 			</div>
 		)
 	}

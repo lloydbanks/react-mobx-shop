@@ -1,12 +1,13 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import LinkButton from '@c/hocs/link'
+import {Button} from 'react-bootstrap'
 import {routesMap} from '@/routes'
 import E404 from '@p/error404'
 import store from '@c/hocs/store'
 
 function Product(props) {
 	const {id} = props.match.params
-	const {products} = props.stores
+	const {products, cart} = props.stores
 	const product = products.getById(id)
 
 	if(product) {
@@ -14,7 +15,11 @@ function Product(props) {
 			<div>
 				<h2>{product.title}</h2>
 				<p>Price: {product.price}</p>
-				<Link to={routesMap.home} className="btn btn-warning">Back</Link>
+				<LinkButton to={routesMap.home} className="btn btn-warning">Back</LinkButton>
+				{!cart.contains(product.id) ?
+					<Button onClick={() => cart.add(product.id)} className="ml-2">Add to cart</Button> :
+					<Button onClick={() => cart.remove(product.id)} variant="danger" className="ml-2">Remove from cart</Button>
+				}
 			</div>
 		)
 	} else {
