@@ -1,17 +1,20 @@
 import React from 'react'
-import cartModel from '@s/cart'
-import orderModel from '@s/order'
 import {urlBuilder} from '@/routes'
 import {Link} from 'react-router-dom'
+import store from '@c/hocs/store'
 
-export default class extends React.Component {
+class Result extends React.Component {
 	render() {
+		const {order, cart} = this.props.stores
+
 		return (
 			<div>
 				<h2>Success</h2>
-				<p>Thank you, {orderModel.data.name} for your order!</p>
-				<p>Your total price: {cartModel.total}</p>
+				<p>Thank you, {order.data.name} for your order!</p>
+				<p>Your total price: {cart.total}</p>
 			</div>
 		)
 	}
 }
+
+export default store(Result)

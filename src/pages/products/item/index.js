@@ -1,10 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {routesMap} from '@/routes'
-import {inject} from 'mobx-react'
 import E404 from '@p/error404'
+import store from '@c/hocs/store'
 
-export default inject('stores') (function(props) {
+function Product(props) {
 	const {id} = props.match.params
 	const {products} = props.stores
 	const product = products.getById(id)
@@ -20,4 +20,6 @@ export default inject('stores') (function(props) {
 	} else {
 		return <E404 />
 	}
-})
+}
+
+export default store(Product)

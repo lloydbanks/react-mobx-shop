@@ -4,9 +4,9 @@ import {Card, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import {urlBuilder} from '@/routes'
 import styles from './index.module.css'
-import {observer, inject} from 'mobx-react'
+import store from '@c/hocs/store'
 
-export default @inject('stores') @observer class extends React.Component {
+class Products extends React.Component {
 	render() {
 		const {products, cart} = this.props.stores
 
@@ -49,3 +49,5 @@ export default @inject('stores') @observer class extends React.Component {
 		)
 	}
 }
+
+export default store(Products)
