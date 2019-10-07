@@ -14,7 +14,9 @@ function Product(props) {
 		return (
 			<div>
 				<h2>{product.title}</h2>
-				<p>Price: {product.price}</p>
+				<img src={product.img} alt="" className="img-thumbnail float-left mr-2"/>
+				<p><b>Price</b>: ${product.price}</p>
+				<p><b>Description</b>: {product.description}</p>
 				<LinkButton to={routesMap.home} className="btn btn-warning">Back</LinkButton>
 				{!cart.contains(product.id) ?
 					<Button onClick={() => cart.add(product.id)} className="ml-2">Add to cart</Button> :

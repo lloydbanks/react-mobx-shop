@@ -1,0 +1,18 @@
+/*
+* Install JSON Server: npm install -g json-server
+* Start JSON Server: json-server --watch db.json
+*/
+
+const dbUrl = 'http://localhost:3000/'
+
+export default function(url, options, baseUrl = dbUrl) {
+	return fetch(baseUrl + url, options).then(response => {
+		if(response.status !== 200) {
+			return response.text().then(text => {
+				throw new Error(text)
+			})
+		}
+
+		return response.json()
+	})
+}
