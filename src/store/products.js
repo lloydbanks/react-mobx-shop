@@ -19,8 +19,12 @@ export default class {
 	}
 
 	@action load() {
-		this.api.all().then(products => {
-			this.data = products
+		return new Promise((resolve, reject) => {
+			this.api.all().then(products => {
+				this.data = products
+				
+				resolve(true)
+			})	
 		})
 	}
 
