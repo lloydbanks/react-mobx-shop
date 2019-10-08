@@ -7,3 +7,5 @@ import stores from '@s'
 stores.products.load().then(() => {
 	ReactDom.render(<Provider stores={stores}><App/></Provider>, document.getElementById('app'))	
 })
+
+stores.cart.load()

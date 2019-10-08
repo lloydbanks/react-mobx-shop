@@ -1,52 +1,55 @@
 {
-	"products": [
-	   {
-	      "id":100,
-	      "title":"iPhone 11",
-	      "description":"64GB - Black (Verizon)",
-	      "price":1200,
-	      "rest":10,
-	      "img":"https://pisces.bbystatic.com/image2/BestBuy_US/Gallery/SOL-55304-shop-iphone11-carrier-106455.jpg;maxHeight=150;maxWidth=150"
-	   },
-	   {
-	      "id":101,
-	      "title":"Apple - MacBook Pro",
-	      "description":"13\" Display with Touch Bar - Intel Core i7 - 16GB Memory - 1TB SSD - Space Gray",
-	      "price":2400,
-	      "rest":5,
-	      "img":"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6358/6358847_sd.jpg;maxHeight=150;maxWidth=150"
-	   },
-	   {
-	      "id":102,
-	      "title":"Google - Pixel 3",
-	      "description":"64GB (Unlocked) - Just Black",
-	      "price":2400,
-	      "rest":7,
-	      "img":"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6319/6319224_sd.jpg;maxHeight=150;maxWidth=150"
-	   },
-	   {
-	      "id":103,
-	      "title":"Samsung - Galaxy Note10+",
-	      "description":"256GB Memory Cell Phone (Unlocked) - Aura Black",
-	      "price":1000,
-	      "rest":12,
-	      "img":"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6359/6359978_sd.jpg;maxHeight=150;maxWidth=150"
-	   },
-	   {
-	      "id":104,
-	      "title":"Apple - 12.9-Inch iPad Pro",
-	      "description":"Latest Model with Wi-Fi - 256GB - Space Gray",
-	      "price":1150,
-	      "rest":9,
-	      "img":"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5985/5985640_sd.jpg;maxHeight=150;maxWidth=150"
-	   },
-	   {
-	      "id":105,
-	      "title":"Canon - VIXIA HF W10 Pro",
-	      "description":"Waterproof HD Camcorder - Blue",
-	      "price":320,
-	      "rest":9,
-	      "img":"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6331/6331906_rd.jpg;maxHeight=150;maxWidth=150"
-	   }
-	]
+  "products": [
+    {
+      "id": 100,
+      "title": "iPhone 11",
+      "description": "64GB - Black (Verizon)",
+      "price": 1200,
+      "rest": 10,
+      "img": "https://pisces.bbystatic.com/image2/BestBuy_US/Gallery/SOL-55304-shop-iphone11-carrier-106455.jpg;maxHeight=150;maxWidth=150"
+    },
+    {
+      "id": 101,
+      "title": "Apple - MacBook Pro",
+      "description": "13\" Display with Touch Bar - Intel Core i7 - 16GB Memory - 1TB SSD - Space Gray",
+      "price": 2400,
+      "rest": 5,
+      "img": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6358/6358847_sd.jpg;maxHeight=150;maxWidth=150"
+    },
+    {
+      "id": 102,
+      "title": "Google - Pixel 3",
+      "description": "64GB (Unlocked) - Just Black",
+      "price": 2400,
+      "rest": 7,
+      "img": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6319/6319224_sd.jpg;maxHeight=150;maxWidth=150"
+    },
+    {
+      "id": 103,
+      "title": "Samsung - Galaxy Note10+",
+      "description": "256GB Memory Cell Phone (Unlocked) - Aura Black",
+      "price": 1000,
+      "rest": 12,
+      "img": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6359/6359978_sd.jpg;maxHeight=150;maxWidth=150"
+    },
+    {
+      "id": 104,
+      "title": "Apple - 12.9-Inch iPad Pro",
+      "description": "Latest Model with Wi-Fi - 256GB - Space Gray",
+      "price": 1150,
+      "rest": 9,
+      "img": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5985/5985640_sd.jpg;maxHeight=150;maxWidth=150"
+    },
+    {
+      "id": 105,
+      "title": "Canon - VIXIA HF W10 Pro",
+      "description": "Waterproof HD Camcorder - Blue",
+      "price": 320,
+      "rest": 9,
+      "img": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6331/6331906_rd.jpg;maxHeight=150;maxWidth=150"
+    }
+  ],
+  "cart": [
+    
+  ]
 }

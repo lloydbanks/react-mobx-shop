@@ -1,12 +1,13 @@
-import cart from './cart'
+import cartStore from './cart'
 import productsStore from './products'
 import * as products from '@/api/products'
+import * as cart from '@/api/cart'
 import order from './order'
 
 class RootStore {
 	constructor() {
-		this.api = {products}
-		this.cart = new cart(this)
+		this.api = {products, cart}
+		this.cart = new cartStore(this)
 		this.products = new productsStore(this)
 		this.order = new order(this)
 	}
