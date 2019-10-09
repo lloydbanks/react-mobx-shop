@@ -1,5 +1,4 @@
 import React from 'react'
-import {CART, ORDER, RESULT} from '@/consts'
 import MinMax from '@c/inputs/minmax'
 import PropTypes from 'prop-types'
 import {Button} from 'react-bootstrap'
@@ -14,10 +13,10 @@ class Cart extends React.Component {
 			return (
 				<tr key={product.id}>
 					<td>{product.title}</td>
-					<td>{product.price}</td>
+					<td>${product.price}</td>
 					<td><MinMax min={1} max={product.rest} count={product.count} onChange={(count) => cart.change(product.id, count)} /></td>
-					<td>{product.price * product.count}</td>
-					<td><button onClick={() => cart.remove(product.id)}>Delete</button></td>
+					<td>${product.price * product.count}</td>
+					<td><button className="btn btn-danger btn-sm" onClick={() => cart.remove(product.id)}>Delete</button></td>
 				</tr>
 			)
 		})
@@ -40,7 +39,7 @@ class Cart extends React.Component {
 							{products}
 						</tbody>
 					</table>
-					<p>Total: {cart.total}</p>
+					<p>Total: ${cart.total}</p>
 				</div>
 				{!!cart.products.length && <LinkButton to={routesMap.order} className="btn btn-primary">Next</LinkButton>}
 			</div>

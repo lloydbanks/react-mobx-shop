@@ -18,4 +18,12 @@ function remove(id) {
 	})
 }
 
-export {load, add, remove}
+function change(id, count) {
+	return request('cart/' + id, {
+		method: 'PUT',
+		headers: {'Content-Type': 'application/json'},
+		body: JSON.stringify({count})
+	})
+}
+
+export {load, add, remove, change}

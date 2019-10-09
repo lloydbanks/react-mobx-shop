@@ -51,6 +51,10 @@ export default class {
 	@action change(id, count) {
 		const index = this.products.findIndex(product => product.id === id)
 
-		if(index !== -1) this.products[index].count = count
+		if(index !== -1) {
+			this.api.change(id, count).then(result => {
+				this.products[index].count = count
+			})
+		}
 	}
 }
