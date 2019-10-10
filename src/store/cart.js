@@ -35,16 +35,28 @@ export default class {
 	}
 
 	@action add(id) {
-		this.api.add(id).then(result => {
+		this.api.add(id).then(() => {
 			this.products.push({id, count: 1})
 		})
 	}
 
 	@action remove(id) {
-		this.api.remove(id).then(result => {
+		this.api.remove(id).then(() => {
 			const index = this.products.findIndex(product => product.id === id)
 
 			if(index !== -1) this.products.splice(index, 1)
+		})	
+	}
+
+	@action clear() {
+		const ids = this.products.map(product => product.id).toString()
+
+		return new Promise(resolve => {
+			this.api.remove(ids).then(() => {
+				this.products = []
+
+				resolve()
+			})
 		})
 	}
 
@@ -52,7 +64,7 @@ export default class {
 		const index = this.products.findIndex(product => product.id === id)
 
 		if(index !== -1) {
-			this.api.change(id, count).then(result => {
+			this.api.change(id, count).then(() => {
 				this.products[index].count = count
 			})
 		}

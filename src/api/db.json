@@ -49,14 +49,5 @@
       "img": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6331/6331906_rd.jpg;maxHeight=150;maxWidth=150"
     }
   ],
-  "cart": [
-    {
-      "count": 9,
-      "id": 105
-    },
-    {
-      "count": 5,
-      "id": 101
-    }
-  ]
+  "cart": []
 }

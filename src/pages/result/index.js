@@ -5,13 +5,13 @@ import store from '@c/hocs/store'
 
 class Result extends React.Component {
 	render() {
-		const {order, cart} = this.props.stores
+		const {total, name} = this.props.stores.order.userCache
 
 		return (
 			<div>
 				<h2>Success</h2>
-				<p>Thank you, {order.data.name} for your order!</p>
-				<p>Your total price: {cart.total}</p>
+				<p>Thank you, {name} for your order!</p>
+				<p>Your total price: ${total}</p>
 			</div>
 		)
 	}
