@@ -2,10 +2,11 @@ import {observable, computed, action} from 'mobx'
 
 export default class {
 	constructor(rootStore) {
+		this.api = rootStore.api.products
 		this.rootStore = rootStore
 	}
 
-	@observable data = getProducts()
+	@observable data = []
 
 	@computed get productsMap() {
 		const obj = {}
@@ -17,27 +18,19 @@ export default class {
 		return obj
 	}
 
+	@action load() {
+		return new Promise((resolve, reject) => {
+			this.api.all().then(products => {
+				this.data = products
+				
+				resolve(true)
+			})	
+		})
+	}
+
 	getById(id) {
 		const index = this.productsMap[id]
 
 		return (index !== undefined) ? this.data[index] : null
 	}
-}
-
-// server api
-function getProducts() {
-	return [
-		{
-			id: 100,
-			title: 'iPhone 10',
-			price: 60000,
-			rest: 10
-		},
-		{
-			id: 101,
-			title: 'Samsung 10',
-			price: 50000,
-			rest: 5
-		}
-	]
 }

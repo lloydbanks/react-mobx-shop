@@ -2,8 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f774192-2a4f-4bc8-8f98-76317c803646" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/api/cart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/db.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/helpers/request.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/products.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Inputs/minmax.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/header/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/hocs/link.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/hocs/store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/sidebar/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/input.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/input.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Inputs/minmax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Inputs/minmax.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/cart/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/cart/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/order/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/order/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/products/item/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/products/item/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/products/list/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/products/list/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/result/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/result/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/cart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/products.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +80,8 @@
       <option name="presentableId" value="Default" />
       <updated>1565355035612</updated>
       <workItem from="1565355036960" duration="5225000" />
+      <workItem from="1570822719408" duration="219000" />
+      <workItem from="1570874357836" duration="609000" />
     </task>
     <servers />
   </component>
@@ -69,7 +93,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

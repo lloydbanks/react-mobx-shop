@@ -29,6 +29,8 @@ export default class {
 		},
 	}
 
+	@observable userCache = {}
+
 	@computed get disabled() {
 		return Object.values(this.formData).every(input => input.valid)
 	}
@@ -49,4 +51,27 @@ export default class {
 		field.valid = field.validator(field.value)
 	}
 
+	@action clear() {
+		for(let key in this.formData) {
+			this.formData[key].value = ''
+			this.formData[key].valid = null
+		}
+	}
+
+	@action send() {
+		// api order create
+		return new Promise(resolve => {
+			const cart = this.rootStore.cart
+			this.userCache.total = cart.total
+
+			for(let key in this.formData) {
+				this.userCache[key] = this.formData[key].value
+
+				this.formData[key].value = ''
+				this.formData[key].valid = null
+			}
+			
+			cart.clear().then(() => resolve())
+		})
+	}
 }

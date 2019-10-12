@@ -4,4 +4,8 @@ import App from './app'
 import {Provider} from 'mobx-react'
 import stores from '@s'
 
-ReactDom.render(<Provider stores={stores}><App/></Provider>, document.getElementById('app'))
+stores.products.load().then(() => {
+	ReactDom.render(<Provider stores={stores}><App/></Provider>, document.getElementById('app'))	
+})
+
+stores.cart.load()

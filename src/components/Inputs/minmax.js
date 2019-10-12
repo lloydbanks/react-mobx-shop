@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styles from './minmax.module.css'
 
 export default class Input extends React.PureComponent {
 	static defaultProps = {
@@ -47,17 +48,26 @@ export default class Input extends React.PureComponent {
 	}
 
 	render() {
+		const btnClass = `btn btn-warning btn-sm ${styles.btn}`
+
 		return (
 			<div>
-				<button onClick={this.decrease}>-</button>
-				<input 
-					type="text" 
-					value={this.state.inputValue}
-					onChange={(e) => this.handleChange(e.target.value)}
-					onBlur={this.fixCounter}
-				/>
-				<button onClick={this.increase}>+</button>
-				<span> min: {this.props.min} | max: {this.props.max}</span>
+				<div className="input-group">
+				  <div className="input-group-prepend">
+				    <button className={btnClass} onClick={this.decrease}>-</button>
+				  </div>
+				  <input 
+						type="text" 
+						value={this.state.inputValue}
+						onChange={(e) => this.handleChange(e.target.value)}
+						onBlur={this.fixCounter}
+						className="form-control"
+					/>
+					<div className="input-group-append">
+						<button className={btnClass} onClick={this.increase}>+</button>
+						<span className="input-group-text">min: {this.props.min} | max: {this.props.max}</span>
+					</div>
+				</div>
 			</div>
 		)
 	}

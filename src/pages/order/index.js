@@ -1,12 +1,11 @@
 import React from 'react'
 import {Form, Button, Modal} from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import {CART, RESULT} from '@/consts'
-import {observer, inject} from 'mobx-react'
 import {routesMap} from '@/routes'
 import {Link} from 'react-router-dom'
+import store from '@c/hocs/store'
 
-export default @inject('stores') @observer class extends React.Component {
+class Order extends React.Component {
 	state = {
 		showModal: false
 	}
@@ -16,8 +15,10 @@ export default @inject('stores') @observer class extends React.Component {
 	}
 
 	confirm = () => {
-		this.show(false)
-		this.props.history.push(routesMap.success)
+		this.props.stores.order.send().then(() => {
+			this.show(false)
+			this.props.history.push(routesMap.success)	
+		})
 	}
 
 	render() {
@@ -56,7 +57,7 @@ export default @inject('stores') @observer class extends React.Component {
 						<Modal.Title>Check info</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						<p><strong>Total price: {cart.total}</strong></p>
+						<p><strong>Total price: ${cart.total}</strong></p>
 						<p>Is everything correct?</p>
 					</Modal.Body>
 					<Modal.Footer>
@@ -68,3 +69,5 @@ export default @inject('stores') @observer class extends React.Component {
 		)
 	}
 }
+
+export default store(Order)

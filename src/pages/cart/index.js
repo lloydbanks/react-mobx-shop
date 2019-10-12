@@ -1,23 +1,22 @@
 import React from 'react'
-import {CART, ORDER, RESULT} from '@/consts'
 import MinMax from '@c/inputs/minmax'
 import PropTypes from 'prop-types'
 import {Button} from 'react-bootstrap'
-import {observer, inject} from 'mobx-react'
-import {Link} from 'react-router-dom'
+import store from '@c/hocs/store'
+import LinkButton from '@c/hocs/link'
 import {routesMap} from '@/routes'
 
-export default @inject('stores') @observer class extends React.Component {
+class Cart extends React.Component {
 	render() {
 		const {cart} = this.props.stores
 		const products = cart.detailProducts.map((product, i) => {
 			return (
 				<tr key={product.id}>
 					<td>{product.title}</td>
-					<td>{product.price}</td>
+					<td>${product.price}</td>
 					<td><MinMax min={1} max={product.rest} count={product.count} onChange={(count) => cart.change(product.id, count)} /></td>
-					<td>{product.price * product.count}</td>
-					<td><button onClick={() => cart.remove(product.id)}>Delete</button></td>
+					<td>${product.price * product.count}</td>
+					<td><button className="btn btn-danger btn-sm" onClick={() => cart.remove(product.id)}>Delete</button></td>
 				</tr>
 			)
 		})
@@ -40,10 +39,12 @@ export default @inject('stores') @observer class extends React.Component {
 							{products}
 						</tbody>
 					</table>
-					<p>Total: {cart.total}</p>
+					<p>Total: ${cart.total}</p>
 				</div>
-				{!!cart.products.length && <Link to={routesMap.order} className="btn btn-primary">Next</Link>}
+				{!!cart.products.length && <LinkButton to={routesMap.order} className="btn btn-primary">Next</LinkButton>}
 			</div>
 		)
 	}
 }
+
+export default store(Cart)

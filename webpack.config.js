@@ -71,13 +71,14 @@ const conf = {
 			'@': path.resolve(__dirname, 'src'),
 			'@c': path.resolve(__dirname, 'src/components'),
 			'@p': path.resolve(__dirname, 'src/pages'),
-			'@s': path.resolve(__dirname, 'src/store'),
+			'@s': path.resolve(__dirname, 'src/store')
 		}
 	},
 	devServer: {
 		historyApiFallback: true
 	},
-	devtool: 'cheap-module-eval-source-map'
+	devtool: 'eval-source-map',
+	// stats: 'verbose'
 }
 
 module.exports = conf
