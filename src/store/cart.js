@@ -7,6 +7,7 @@ export default class {
 	}
 
 	@observable products = []
+	@observable processId = {}
 
 	@computed get detailProducts() {
 		return this.products.map(product => {
@@ -35,17 +36,30 @@ export default class {
 	}
 
 	@action add(id) {
-		this.api.add(id).then(() => {
-			this.products.push({id, count: 1})
-		})
+		if(!this.contains(id) && !this.processId.hasOwnProperty(id)) {
+			this.processId[id] = true
+
+			this.api.add(id).then(() => {
+				this.products.push({id, count: 1})
+
+				delete this.processId[id]
+			})
+		}
 	}
 
 	@action remove(id) {
-		this.api.remove(id).then(() => {
+		if(this.contains(id) && !this.processId.hasOwnProperty(id)) {
 			const index = this.products.findIndex(product => product.id === id)
 
-			if(index !== -1) this.products.splice(index, 1)
-		})	
+			if(index !== -1) {
+				this.processId[id] = true
+
+				this.api.remove(id).then(() => {
+					this.products.splice(index, 1)
+					delete this.processId[id]
+				})
+			}
+		}
 	}
 
 	@action clear() {
@@ -61,12 +75,17 @@ export default class {
 	}
 
 	@action change(id, count) {
-		const index = this.products.findIndex(product => product.id === id)
+		if(!this.processId.hasOwnProperty(id)) {
+			const index = this.products.findIndex(product => product.id === id)
 
-		if(index !== -1) {
-			this.api.change(id, count).then(() => {
-				this.products[index].count = count
-			})
+			if(index !== -1) {
+				this.processId[id] = true
+
+				this.api.change(id, count).then(() => {
+					delete this.processId[id]
+					this.products[index].count = count
+				})
+			}
 		}
 	}
 }

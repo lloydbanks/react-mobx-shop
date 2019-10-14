@@ -1,7 +1,5 @@
 import React from 'react'
 import MinMax from '@c/inputs/minmax'
-import PropTypes from 'prop-types'
-import {Button} from 'react-bootstrap'
 import store from '@c/hocs/store'
 import LinkButton from '@c/hocs/link'
 import {routesMap} from '@/routes'
@@ -14,9 +12,19 @@ class Cart extends React.Component {
 				<tr key={product.id}>
 					<td>{product.title}</td>
 					<td>${product.price}</td>
-					<td><MinMax min={1} max={product.rest} count={product.count} onChange={(count) => cart.change(product.id, count)} /></td>
+					<td>
+						<MinMax min={1} max={product.rest} count={product.count}
+								onChange={(count) => cart.change(product.id, count)}
+								disabled={product.id in cart.processId} />
+					</td>
 					<td>${product.price * product.count}</td>
-					<td><button className="btn btn-danger btn-sm" onClick={() => cart.remove(product.id)}>Delete</button></td>
+					<td>
+						<button className="btn btn-danger btn-sm"
+								onClick={() => cart.remove(product.id)}
+								disabled={product.id in cart.processId}>
+							Delete
+						</button>
+					</td>
 				</tr>
 			)
 		})
