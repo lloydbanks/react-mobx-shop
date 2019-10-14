@@ -4,7 +4,7 @@ export default class {
 	constructor(rootStore) {
 		this.api = rootStore.api.products
 		this.rootStore = rootStore
-	}
+}
 
 	@observable data = []
 

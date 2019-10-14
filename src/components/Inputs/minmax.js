@@ -49,14 +49,18 @@ export default class Input extends React.PureComponent {
 
 	render() {
 		const btnClass = `btn btn-warning btn-sm ${styles.btn}`
+		const {count, min, max, disabled} = this.props
 
 		return (
 			<div>
 				<div className="input-group">
 				  <div className="input-group-prepend">
-				    <button className={btnClass} onClick={this.decrease}>-</button>
+				    <button
+						className={btnClass}
+						onClick={this.decrease}
+						disabled={disabled || count <= min}>-</button>
 				  </div>
-				  <input 
+				  <input
 						type="text" 
 						value={this.state.inputValue}
 						onChange={(e) => this.handleChange(e.target.value)}
@@ -64,8 +68,11 @@ export default class Input extends React.PureComponent {
 						className="form-control"
 					/>
 					<div className="input-group-append">
-						<button className={btnClass} onClick={this.increase}>+</button>
-						<span className="input-group-text">min: {this.props.min} | max: {this.props.max}</span>
+						<button
+							className={btnClass}
+							onClick={this.increase}
+							disabled={disabled || count >= max}>+</button>
+						<span className="input-group-text">min: {min} | max: {max}</span>
 					</div>
 				</div>
 			</div>

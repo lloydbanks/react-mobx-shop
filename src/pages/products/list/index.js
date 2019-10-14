@@ -1,5 +1,4 @@
 import React from 'react'
-import cart from '@s/cart'
 import {Card, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import {urlBuilder} from '@/routes'
@@ -14,11 +13,13 @@ class Products extends React.Component {
 			let btn
 
 			if(!cart.contains(product.id)) {
-				btn = <Button variant="success" className="btn-sm ml-2" onClick={() => cart.add(product.id)}>
+				btn = <Button variant="success" className="btn-sm ml-2" onClick={() => cart.add(product.id)}
+				disabled={product.id in cart.processId}>
 					Add to cart
 				</Button>
 			} else {
-				btn = <Button variant="danger" className="btn-sm ml-2" onClick={() => cart.remove(product.id)}>
+				btn = <Button variant="danger" className="btn-sm ml-2" onClick={() => cart.remove(product.id)}
+				disabled={product.id in cart.processId}>
 					Remove from cart
 				</Button>
 			}
