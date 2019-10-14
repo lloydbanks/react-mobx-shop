@@ -5,7 +5,7 @@ const conf = {
 	entry: './src/main.js',
 	output: {
 		path: path.resolve(__dirname, './dist/'),
-		filename: 'main.js',
+		filename: '[name].js',
 		publicPath: 'dist/' // чтобы система в dev режиме понимала где лежит js файл
 	},
 	module: {
@@ -63,7 +63,7 @@ const conf = {
 	},
 	plugins: [
 	    new MiniCssExtractPlugin({
-	      filename: 'styles.css',
+	      filename: '[name].css',
 	    }),
 	],
 	resolve: {
@@ -77,8 +77,32 @@ const conf = {
 	devServer: {
 		historyApiFallback: true
 	},
-	devtool: 'eval-source-map',
+	// devtool: process.env.NODE_ENV === 'development' ? 'eval-source-map' : false,
 	// stats: 'verbose'
+	optimization: {
+		splitChunks: {
+			cacheGroups: {
+				vendors: {
+					name: 'vendors',
+					test: /[\\/]node_modules[\\/]/,
+					priority: -10,
+					chunks: 'initial'
+				},
+				common: {
+					name: 'common',
+					minChunks: 2,
+					priority: -20,
+					chunks: 'initial',
+					reuseExistingChunk: true
+				}
+			}
+		}
+	}
 }
 
-module.exports = conf
+module.exports = (env, argv) => {
+	const isDevelopment = argv.mode === 'development'
+	if(isDevelopment) conf.devtool = 'eval-source-map'
+
+	return conf
+}
