@@ -1,2 +1,5 @@
+.gitignore
 node_modules/
 .idea/
+dist/
+src/api/db.json
