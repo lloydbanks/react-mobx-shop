@@ -1,4 +1,4 @@
-import {observable, computed, action} from 'mobx'
+import {observable, computed, action, runInAction} from 'mobx'
 
 export default class {
 	constructor(rootStore) {
@@ -31,7 +31,7 @@ export default class {
 
 	@action load() {
 		this.api.load().then(data => {
-			this.products = data
+			runInAction(() => this.products = data)
 		})
 	}
 
@@ -40,9 +40,10 @@ export default class {
 			this.processId[id] = true
 
 			this.api.add(id).then(() => {
-				this.products.push({id, count: 1})
-
-				delete this.processId[id]
+				runInAction(() => {
+					this.products.push({id, count: 1})
+					delete this.processId[id]
+				})
 			})
 		}
 	}
@@ -55,8 +56,10 @@ export default class {
 				this.processId[id] = true
 
 				this.api.remove(id).then(() => {
-					this.products.splice(index, 1)
-					delete this.processId[id]
+					runInAction(() => {
+						this.products.splice(index, 1)
+						delete this.processId[id]
+					})
 				})
 			}
 		}
@@ -67,9 +70,10 @@ export default class {
 
 		return new Promise(resolve => {
 			this.api.remove(ids).then(() => {
-				this.products = []
-
-				resolve()
+				runInAction(() => {
+					this.products = []
+					resolve()
+				})
 			})
 		})
 	}
@@ -82,8 +86,10 @@ export default class {
 				this.processId[id] = true
 
 				this.api.change(id, count).then(() => {
-					delete this.processId[id]
-					this.products[index].count = count
+					runInAction(() => {
+						delete this.processId[id]
+						this.products[index].count = count
+					})
 				})
 			}
 		}
