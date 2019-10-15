@@ -39,12 +39,17 @@ export default class {
 		if(!this.contains(id) && !this.processId.hasOwnProperty(id)) {
 			this.processId[id] = true
 
-			this.api.add(id).then(() => {
-				runInAction(() => {
-					this.products.push({id, count: 1})
-					delete this.processId[id]
-				})
-			})
+            this.api.add(id).then(() => {
+                runInAction(() => {
+                    this.products.push({id, count: 1})
+                })
+            }).catch(() => {
+                this.rootStore.notifications.add('An error occured! Try again later')
+            }).finally(() => {
+                runInAction(() => {
+                    delete this.processId[id]
+                })
+            })
 		}
 	}
 
