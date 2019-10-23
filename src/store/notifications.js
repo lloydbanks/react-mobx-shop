@@ -13,10 +13,14 @@ export default class {
     }
 
     @action add(message, type = 'error', hideTime = 5000) {
-        this.notifications[++this._i] = {
-            id: this._i,
-            message,
-            type
+        const messages = Object.values(this.notifications).map(item => item.message)
+
+        if(!messages.includes(message)) {
+            this.notifications[++this._i] = {
+                id: this._i,
+                message,
+                type
+            }
         }
 
         if(hideTime !== null) {
