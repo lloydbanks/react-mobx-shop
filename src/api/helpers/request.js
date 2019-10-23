@@ -1,6 +1,8 @@
 /*
+* Full fake REST API
 * Install JSON Server: npm install -g json-server
 * Start JSON Server: json-server --watch db.json
+* https://github.com/typicode/json-server
 */
 
 const dbUrl = 'http://localhost:3000/'

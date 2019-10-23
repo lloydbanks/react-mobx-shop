@@ -4,7 +4,7 @@ export default class {
 	constructor(rootStore) {
 		this.api = rootStore.api.products
 		this.rootStore = rootStore
-}
+	}
 
 	@observable data = []
 
@@ -22,9 +22,8 @@ export default class {
 		return new Promise((resolve, reject) => {
 			this.api.all().then(products => {
 				this.data = products
-				
 				resolve(true)
-			})	
+			})
 		})
 	}
 
