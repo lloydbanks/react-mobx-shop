@@ -5,6 +5,7 @@ import Header from '@c/header'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import {routes} from '@/routes'
 import store from '@c/hocs/store'
+import Notifications from '@p/notifications'
 
 class App extends React.Component {
 	render() {
@@ -16,6 +17,7 @@ class App extends React.Component {
 
 		return (
 			<BrowserRouter>
+				<Notifications />
 				<div className="container">
 					<div className="row">
 						<div className="col">

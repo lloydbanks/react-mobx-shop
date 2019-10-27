@@ -22,9 +22,8 @@ export default class {
 		return new Promise((resolve, reject) => {
 			this.api.all().then(products => {
 				this.data = products
-				
 				resolve(true)
-			})	
+			})
 		})
 	}
 

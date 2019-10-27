@@ -24,14 +24,14 @@ export default class {
 	}
 
 	@computed get contains() {
-		return (id) => {
-			return this.products.some(product => product.id === id)
-		}
+		return (id) => this.products.some(product => product.id === id)
 	}
 
 	@action load() {
 		this.api.load().then(data => {
 			runInAction(() => this.products = data)
+		}).catch(err => {
+			this.rootStore.notifications.add('Failed to load cart')
 		})
 	}
 
@@ -39,12 +39,17 @@ export default class {
 		if(!this.contains(id) && !this.processId.hasOwnProperty(id)) {
 			this.processId[id] = true
 
-			this.api.add(id).then(() => {
-				runInAction(() => {
-					this.products.push({id, count: 1})
-					delete this.processId[id]
-				})
-			})
+            this.api.add(id).then(() => {
+                runInAction(() => {
+                    this.products.push({id, count: 1})
+                })
+            }).catch(() => {
+                this.rootStore.notifications.add('Failed to add product to cart')
+            }).finally(() => {
+                runInAction(() => {
+                    delete this.processId[id]
+                })
+            })
 		}
 	}
 
@@ -58,9 +63,14 @@ export default class {
 				this.api.remove(id).then(() => {
 					runInAction(() => {
 						this.products.splice(index, 1)
-						delete this.processId[id]
 					})
-				})
+				}).catch(() => {
+                    this.rootStore.notifications.add('Failed to remove product from cart')
+                }).finally(() => {
+                    runInAction(() => {
+                        delete this.processId[id]
+                    })
+                })
 			}
 		}
 	}
