@@ -5,16 +5,14 @@
 * https://github.com/typicode/json-server
 */
 
+import axios from 'axios'
+
 const dbUrl = 'http://localhost:3000/'
 
 export default function(url, options, baseUrl = dbUrl) {
-	return fetch(baseUrl + url, options).then(response => {
-		if(!response.ok) {
-			return response.text().then(text => {
-				throw new Error(text)
-			})
-		}
-
-		return response.json()
-	})
+	return axios({...options, url: baseUrl + url})
+		.then(response => response.data)
+		.catch(error => {
+			throw new Error(error.message)
+		})
 }
