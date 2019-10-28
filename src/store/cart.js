@@ -76,10 +76,16 @@ export default class {
 	}
 
 	@action clear() {
-		const ids = this.products.map(product => product.id).toString()
+		const ids = this.products.map(product => product.id)
+
+		const promises = ids.map(id => {
+			return new Promise(resolve => {
+				return this.api.remove(id).then(() => resolve(true))
+			})
+		})
 
 		return new Promise(resolve => {
-			this.api.remove(ids).then(() => {
+			return Promise.all(promises).then(() => {
 				runInAction(() => {
 					this.products = []
 					resolve()
