@@ -1,4 +1,5 @@
 import {observable, computed, action, runInAction} from 'mobx'
+import 'regenerator-runtime/runtime'
 
 export default class {
 	constructor(rootStore) {
@@ -27,85 +28,68 @@ export default class {
 		return (id) => this.products.some(product => product.id === id)
 	}
 
-	@action load() {
-		this.api.load().then(data => {
-			runInAction(() => this.products = data)
-		}).catch(err => {
-			this.rootStore.notifications.add('Failed to load cart')
-		})
+	@action async load() {
+	    try {
+            const data = await this.api.load()
+            runInAction(() => this.products = data)
+        } catch {
+            this.rootStore.notifications.add('Failed to load cart')
+        }
 	}
 
-	@action add(id) {
+	@action async add(id) {
 		if(!this.contains(id) && !this.processId.hasOwnProperty(id)) {
 			this.processId[id] = true
 
-            this.api.add(id).then(() => {
-                runInAction(() => {
-                    this.products.push({id, count: 1})
-                })
-            }).catch(() => {
-                this.rootStore.notifications.add('Failed to add product to cart')
-            }).finally(() => {
-                runInAction(() => {
-                    delete this.processId[id]
-                })
-            })
+			try {
+				await this.api.add(id)
+				runInAction(() => this.products.push({id, count: 1}))
+			} catch {
+				this.rootStore.notifications.add('Failed to add product to cart')
+			} finally {
+				runInAction(() => delete this.processId[id])
+			}
 		}
 	}
 
-	@action remove(id) {
+	@action async remove(id) {
 		if(this.contains(id) && !this.processId.hasOwnProperty(id)) {
 			const index = this.products.findIndex(product => product.id === id)
 
 			if(index !== -1) {
 				this.processId[id] = true
 
-				this.api.remove(id).then(() => {
-					runInAction(() => {
-						this.products.splice(index, 1)
-					})
-				}).catch(() => {
-                    this.rootStore.notifications.add('Failed to remove product from cart')
-                }).finally(() => {
-                    runInAction(() => {
-                        delete this.processId[id]
-                    })
-                })
+				try {
+					await this.api.remove(id)
+					runInAction(() => this.products.splice(index, 1))
+				} catch {
+					this.rootStore.notifications.add('Failed to remove product from cart')
+				} finally {
+					runInAction(() => delete this.processId[id])
+				}
 			}
 		}
 	}
 
-	@action clear() {
+	@action async clear() {
 		const ids = this.products.map(product => product.id)
+		const promises = ids.map((id) => this.api.remove(id))
+		await Promise.all(promises)
 
-		const promises = ids.map(id => {
-			return new Promise(resolve => {
-				return this.api.remove(id).then(() => resolve(true))
-			})
-		})
-
-		return new Promise(resolve => {
-			return Promise.all(promises).then(() => {
-				runInAction(() => {
-					this.products = []
-					resolve()
-				})
-			})
-		})
+		runInAction(() => this.products = [])
 	}
 
-	@action change(id, count) {
+	@action async change(id, count) {
 		if(!this.processId.hasOwnProperty(id)) {
 			const index = this.products.findIndex(product => product.id === id)
 
 			if(index !== -1) {
 				this.processId[id] = true
 
-				this.api.change(id, count).then(() => {
-					runInAction(() => {
-						delete this.processId[id]
-						this.products[index].count = count
-					})
+				await this.api.change(id, count)
+				runInAction(() => {
+					delete this.processId[id]
+					this.products[index].count = count
 				})
 			}
 		}

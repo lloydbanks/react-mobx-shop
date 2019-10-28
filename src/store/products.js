@@ -1,4 +1,5 @@
 import {observable, computed, action} from 'mobx'
+import 'regenerator-runtime/runtime'
 
 export default class {
 	constructor(rootStore) {
@@ -19,11 +20,10 @@ export default class {
 	}
 
 	@action load() {
-		return new Promise((resolve, reject) => {
-			this.api.all().then(products => {
-				this.data = products
-				resolve(true)
-			})
+		return new Promise(async (resolve) => {
+			this.data = await this.api.all()
+
+			resolve(true)
 		})
 	}
 
