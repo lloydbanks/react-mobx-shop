@@ -1,4 +1,5 @@
 import {observable, computed, action} from 'mobx'
+import 'regenerator-runtime/runtime'
 
 export default class {
 	constructor(rootStore) {
@@ -60,7 +61,7 @@ export default class {
 
 	@action send() {
 		// api order create
-		return new Promise(resolve => {
+		return new Promise(async (resolve) => {
 			const cart = this.rootStore.cart
 			this.userCache.total = cart.total
 
@@ -71,7 +72,8 @@ export default class {
 				this.formData[key].valid = null
 			}
 			
-			cart.clear().then(() => resolve())
+			await cart.clear()
+			resolve()
 		})
 	}
 }
