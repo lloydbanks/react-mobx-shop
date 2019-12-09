@@ -11,7 +11,7 @@ export default function() {
                 <code>npm install -g json-server</code>
 
                 <h3>Start JSON Server</h3>
-                <code>json-server --watch db.json</code>
+                <code>npm run server</code>
 
                 <p>More info: <a target="_blank" href="https://github.com/typicode/json-server">
                         https://github.com/typicode/json-server
