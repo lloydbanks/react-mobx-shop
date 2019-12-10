@@ -6,23 +6,22 @@ function load() {
 
 function add(id) {
   return request('cart', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    data: JSON.stringify({ id, count: 1 })
+    type: 'add',
+    data: { id, count: 1 }
   })
 }
 
 function remove(id) {
-  return request('cart/' + id, {
-    method: 'DELETE'
+  return request('cart', {
+    type: 'remove',
+    data: { id }
   })
 }
 
 function change(id, count) {
-  return request('cart/' + id, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    data: JSON.stringify({ count })
+  return request('cart', {
+    type: 'change',
+    data: { id, count }
   })
 }
 

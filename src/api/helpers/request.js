@@ -1,17 +1,29 @@
-/*
- * Full fake REST API
- * Install JSON Server: npm install -g json-server
- * Start JSON Server: json-server --watch db.json
- * https://github.com/typicode/json-server
- */
-
 import 'regenerator-runtime/runtime'
-import axios from 'axios'
+import firebase from '../fb'
 
-const dbUrl = 'http://localhost:3000/'
+const db = firebase.firestore()
 
-export default async function(url, options, baseUrl = dbUrl) {
-  const response = await axios({ ...options, url: baseUrl + url })
+export default async function(url, options = { type: 'get', data: {} }) {
+  const { type, data } = options
+  const response = await db.collection(url)
 
-  return response.data
+  switch (type) {
+    case 'get':
+      const getResponse = await response.get()
+      const getData = []
+      getResponse.forEach(doc => getData.push({ id: doc.id, ...doc.data() }))
+
+      return getData
+    case 'add':
+    case 'change':
+      const updData = response.doc(data.id)
+      updData.set({ ...data })
+
+      break
+    case 'remove':
+      const rmData = response.doc(data.id)
+      rmData.delete()
+
+      break
+  }
 }

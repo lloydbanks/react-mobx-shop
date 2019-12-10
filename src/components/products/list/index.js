@@ -8,15 +8,16 @@ function ProductList(props) {
   const { products, cart, Link, urlBuilder } = props
 
   const productsCard = products.data.map(product => {
+    const {id} = product
     let btn
 
-    if (!cart.contains(product.id)) {
+    if (!cart.contains(id)) {
       btn = (
         <Button
           variant="success"
           className="btn-sm ml-2"
-          onClick={() => cart.add(product.id)}
-          disabled={product.id in cart.processId}
+          onClick={() => cart.add(id)}
+          disabled={id in cart.processId}
         >
           Add to cart
         </Button>
@@ -26,8 +27,8 @@ function ProductList(props) {
         <Button
           variant="danger"
           className="btn-sm ml-2"
-          onClick={() => cart.remove(product.id)}
-          disabled={product.id in cart.processId}
+          onClick={() => cart.remove(id)}
+          disabled={id in cart.processId}
         >
           Remove from cart
         </Button>
@@ -35,13 +36,13 @@ function ProductList(props) {
     }
 
     return (
-      <div className={'col col-4 ' + styles.col} key={product.id}>
+      <div className={'col col-4 ' + styles.col} key={id}>
         <Card>
           <Card.Body>
             <Card.Title>{product.title}</Card.Title>
             <Card.Text>Price: {product.price}</Card.Text>
             <Link
-              to={urlBuilder('product', { id: product.id })}
+              to={urlBuilder('product', { id: id })}
               className="btn btn-primary btn-sm"
             >
               View
