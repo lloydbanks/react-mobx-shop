@@ -1,35 +1,35 @@
-import {observable, computed, action} from 'mobx'
+import { observable, computed, action } from 'mobx'
 import 'regenerator-runtime/runtime'
 
 export default class {
-	constructor(rootStore) {
-		this.api = rootStore.api.products
-		this.rootStore = rootStore
-}
+  constructor(rootStore) {
+    this.api = rootStore.api.products
+    this.rootStore = rootStore
+  }
 
-	@observable data = []
+  @observable data = []
 
-	@computed get productsMap() {
-		const obj = {}
+  @computed get productsMap() {
+    const obj = {}
 
-		this.data.forEach((product, index) => {
-			obj[product.id] = index
-		})
+    this.data.forEach((product, index) => {
+      obj[product.id] = index
+    })
 
-		return obj
-	}
+    return obj
+  }
 
-	@action load() {
-		return new Promise(async (resolve) => {
-			this.data = await this.api.all()
+  @action load() {
+    return new Promise(async resolve => {
+      this.data = await this.api.all()
 
-			resolve(true)
-		})
-	}
+      resolve(true)
+    })
+  }
 
-	getById(id) {
-		const index = this.productsMap[id]
+  getById(id) {
+    const index = this.productsMap[id]
 
-		return (index !== undefined) ? this.data[index] : null
-	}
+    return index !== undefined ? this.data[index] : null
+  }
 }

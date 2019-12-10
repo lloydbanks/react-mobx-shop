@@ -8,6 +8,10 @@
     "build": "webpack --mode production",
     "server": "json-server --watch db.json"
   },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -31,6 +35,7 @@
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
+    "prettier": "1.19.1",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
