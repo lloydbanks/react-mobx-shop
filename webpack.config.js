@@ -1,4 +1,4 @@
-const path = require('path') // генерация абсолютного пути из относительного
+const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const conf = {
@@ -6,7 +6,7 @@ const conf = {
 	output: {
 		path: path.resolve(__dirname, './dist/'),
 		filename: '[name].js',
-		publicPath: 'dist/' // чтобы система в dev режиме понимала где лежит js файл
+		publicPath: 'dist/'
 	},
 	module: {
 		rules: [
@@ -15,7 +15,6 @@ const conf = {
 				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
-					// то же самое, что можно описать в .babelrc
 					options: {
 						presets: ['@babel/preset-env'],
 						plugins: [
