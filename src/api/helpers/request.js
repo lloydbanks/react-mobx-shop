@@ -1,7 +1,6 @@
 /*
  * Full fake REST API
- * Install JSON Server: npm install -g json-server
- * Start JSON Server: json-server --watch db.json
+ * Start JSON Server: npm run server
  * https://github.com/typicode/json-server
  */
 

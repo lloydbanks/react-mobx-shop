@@ -39,7 +39,7 @@ function ProductList(props) {
         <Card>
           <Card.Body>
             <Card.Title>{product.title}</Card.Title>
-            <Card.Text>Price: {product.price}</Card.Text>
+            <Card.Text>Price: ${product.price}</Card.Text>
             <Link
               to={urlBuilder('product', { id: product.id })}
               className="btn btn-primary btn-sm"
