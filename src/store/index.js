@@ -8,8 +8,6 @@ import notifications from './notifications'
 
 configure({ enforceActions: 'observed' })
 
-configure({ enforceActions: 'observed' })
-
 class RootStore {
   constructor() {
     this.api = { products, cart }
